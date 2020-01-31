@@ -163,12 +163,20 @@ public class Assignment1 {
     public static void main(String[] args) {
         System.out.println(" "); // vscode java print buffer
         
-        // System.out.println(c(102,101)); //Q1
+        //Q1
+        // System.out.println(c(102,101)); 
         
-        // System.out.println(P(3)); //Q2
+        //Q2
+        // System.out.println(P(3)); 
         
-        // writeBlock('*', 5, 3); //Q3
+        //Q3
+        // writeBlock('*', 5, 3); 
         
-        // reverseDigits(101107739); // Q4
+        // Q4
+        // reverseDigits(101107739); 
+
+        //Q5
+        // String arr[] = {"a", "b", "c", "d"};
+        // System.out.println(myBinarySearch(arr, 0, arr.length, "b"));
     }
 }
