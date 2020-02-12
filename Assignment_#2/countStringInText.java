@@ -41,10 +41,10 @@ public class countStringInText {
         space becomes s -> p -> a -> c -> e  with e being tail.
     */
     public static LinkedList<Character> makeLinkedListStr(String word){
-        LinkedList<Character> inOrderedList = new LinkedList<>(); //This creates a new linkedList that java infers type of
+        LinkedList<Character> inOrderedList = new LinkedList<>(); //This creates a new LinkedList that java infers type of
         //TODO: Iterate through given word and add one by one (seems like an inefficient solution but only one can think of)
-        for (int i = 0; i < word.length();i++) {
-            inOrderedList.add(word.charAt(i)); //simple adds whatever the char is at the given iterant value to the list
+        for (int index = 0; index < word.length();index++) {
+            inOrderedList.add(word.charAt(index)); //simply adds whatever the char is at the given iterant value to the list
         }
         return inOrderedList; //should return correct list
         //TODO: check this thing for christs sake lol
@@ -53,7 +53,15 @@ public class countStringInText {
 
     /* 
         TODO:A method that makes an Arraylist
+        Literally the same thing as the linked list
     */
+    public static ArrayList<Character> makeArrayListStr(String word){
+        ArrayList<Character> inOrderedArray = new ArrayList<>(); //Again, java infers the type of the created ArrayList
+        for (int index = 0; index < word.length(); index++) {
+            inOrderedArray.add(word.charAt(index)); //same concept,adds whatever the char is at the given iterant value to the list
+        }
+        return inOrderedArray;  //hopefully return list in correct order
+    }
     /* 
         A method that reads a file and checks it line by line
     */
