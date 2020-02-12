@@ -129,6 +129,6 @@ public class countStringInText {
         
         System.out.println("Using the ArrayList approach: " + countArrayList + "matches, done in " + elapsedTimeArrayList + " milliseconds");
         
-        scanText.close();
+        scanText.close(); // close scanner
     }
 }
