@@ -41,7 +41,7 @@ public class countStringInText {
         space becomes s -> p -> a -> c -> e  with e being tail.
     */
     public static LinkedList<Character> makeLinkedListStr(String word){
-        LinkedList<Character> inOrderedList = new LinkedList<>(); //This creates a new LinkedList that java infers type of
+        LinkedList<Character> inOrderedList = new LinkedList<Character>(); //This creates a new LinkedList that java infers type of
         //TODO: Iterate through given word and add one by one (seems like an inefficient solution but only one can think of)
         for (int index = 0; index < word.length();index++) {
             inOrderedList.add(word.charAt(index)); //simply adds whatever the char is at the given iterant value to the list
@@ -56,7 +56,7 @@ public class countStringInText {
         Literally the same thing as the linked list
     */
     public static ArrayList<Character> makeArrayListStr(String word){
-        ArrayList<Character> inOrderedArray = new ArrayList<>(); //Again, java infers the type of the created ArrayList
+        ArrayList<Character> inOrderedArray = new ArrayList<Character>(); //Again, java infers the type of the created ArrayList
         for (int index = 0; index < word.length(); index++) {
             inOrderedArray.add(word.charAt(index)); //same concept,adds whatever the char is at the given iterant value to the list
         }
@@ -73,7 +73,7 @@ public class countStringInText {
         2) is the instanceof operator useful here?
         3) why runtime error from BufferedReader? ... you must close java reader
     */
-    public static int searchListSpecificWord(String filename, Object K) {
+    public static int searchListSpecificWord(String filename, Object K)  throws IOException {
         if(!(K instanceof LinkedList) && !(K instanceof ArrayList)){
             throw new IllegalArgumentException("Invalid type provded");
         }
@@ -106,7 +106,7 @@ public class countStringInText {
         return count;
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IOException{
         Scanner scanText = new Scanner(System.in);
         System.out.println("Please enther the location of the text file (path): ");
         String filename = scanText.nextLine();
@@ -128,5 +128,7 @@ public class countStringInText {
         System.out.println("Using the LinkedList approach: " + countLinkedList + "matches, done in " + elapsedTimeLinkedList + " milliseconds");
         
         System.out.println("Using the ArrayList approach: " + countArrayList + "matches, done in " + elapsedTimeArrayList + " milliseconds");
+        
+        scanText.close();
     }
 }
