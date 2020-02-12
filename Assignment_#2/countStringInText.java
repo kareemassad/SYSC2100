@@ -69,7 +69,7 @@ public class countStringInText {
         if(!(K instanceof LinkedList) && !(K instanceof ArrayList)){
             throw new IllegalArgumentException("Invalid type provded");
         }
-        int count;
+        int count = 0;
         String[] wordsFromLine;
         BufferedReader read = new BufferedReader(new FileReader(filename));
 
