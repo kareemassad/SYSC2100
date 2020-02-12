@@ -35,7 +35,27 @@ public class countStringInText {
         return -1; // search failed
     }
     /* 
-    A method that reads a file and checks it line by line
+        TODO:A method that makes a LinkedList
+        1) The linked list can be as big as any given string (so it must itterate)
+        2) It must return the string as chars in the exact given order
+        space becomes s -> p -> a -> c -> e  with e being tail.
+    */
+    public static LinkedList<Character> makeLinkedListStr(String word){
+        LinkedList<Character> inOrderedList = new LinkedList<>(); //This creates a new linkedList that java infers type of
+        //TODO: Iterate through given word and add one by one (seems like an inefficient solution but only one can think of)
+        for (int i = 0; i < word.length();i++) {
+            inOrderedList.add(word.charAt(i)); //simple adds whatever the char is at the given iterant value to the list
+        }
+        return inOrderedList; //should return correct list
+        //TODO: check this thing for christs sake lol
+
+    }
+
+    /* 
+        TODO:A method that makes an Arraylist
+    */
+    /* 
+        A method that reads a file and checks it line by line
     */
     public static int searchListSpecificWord(String filename, Object K) throws IOException {
         if(!(K instanceof LinkedList) && !(K instanceof ArrayList)){
