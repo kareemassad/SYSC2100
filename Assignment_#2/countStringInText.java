@@ -73,7 +73,7 @@ public class countStringInText {
         2) is the instanceof operator useful here?
         3) why runtime error from BufferedReader? ... you must close java reader
     */
-    public static int searchListSpecificWord(String filename, Object K) throws IOException {
+    public static int searchListSpecificWord(String filename, Object K) {
         if(!(K instanceof LinkedList) && !(K instanceof ArrayList)){
             throw new IllegalArgumentException("Invalid type provded");
         }
@@ -112,9 +112,10 @@ public class countStringInText {
         String filename = scanText.nextLine();
         System.out.println("What is the pattern you want checked?");
         String pattern = scanText.nextLine();
-
-        LinkedList<> patternForLinkedList = makeLinkedListStr(pattern);
-        ArrayList<> patternForArrayList = makeArrayListStr(pattern);
+        
+        //you must mention that it is type character. I thought java would infer type.
+        LinkedList<Character> patternForLinkedList = makeLinkedListStr(pattern);
+        ArrayList<Character> patternForArrayList = makeArrayListStr(pattern);
 
         long originalTime = System.currentTimeMillis(); //current time, thanks for the hint prof haha
         
