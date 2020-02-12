@@ -116,7 +116,13 @@ public class countStringInText {
         LinkedList<> patternForLinkedList = makeLinkedListStr(pattern);
         ArrayList<> patternForArrayList = makeArrayListStr(pattern);
 
-        int originalTime = 
+        int originalTime = System.currentTimeMillis(); //current time, thanks for the hint prof haha
+        
+        int countLinkedList = searchListSpecificWord(filename, patternForLinkedList);
+        int elapsedTimeLinkedList = System.currentTimeMillis() - originalTime; //elapsed time for linked list
+
+        int countArrayList = searchListSpecificWord(filename, patternForArrayList);
+        int elapsedTimeArrayList = System.currentTimeMillis() - originalTime;
 
     }
 }
