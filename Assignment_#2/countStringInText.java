@@ -63,7 +63,15 @@ public class countStringInText {
         return inOrderedArray;  //hopefully return list in correct order
     }
     /* 
-        A method that reads a file and checks it line by line
+        A method that reads a file and checks it line by line.
+        Taking a line by line approach to this assignment. The program reads the first line of the file, dissects 
+        it into an ADT implentation of just words without spaces. It then iterates through the array and just scans 
+        for the pattern given by the user.
+        
+        @Challenges: 
+        1) How the hell do you get rid of the spaces?
+        2) is the instanceof operator useful here?
+        3) why runtime error from BufferedReader? ... you must close java reader
     */
     public static int searchListSpecificWord(String filename, Object K) throws IOException {
         if(!(K instanceof LinkedList) && !(K instanceof ArrayList)){
@@ -82,6 +90,7 @@ public class countStringInText {
                 wordsFromLine = lineBeingRead.split(""); //The string split() method breaks a given string around matches of the given regular expression.
                 // This essentially stores words between spaces
                 for (int index = 0; index < wordsFromLine.length; index++) { //iterates through array of all the words in the line
+                    //same implentation but LinkedList vs ArrayList
                     if (K instanceof LinkedList && findBrute(makeLinkedListStr(wordsFromLine[index]), (LinkedList<Character>) K) != -1) {
                         count = count + 1;
                     } else if(K instanceof ArrayList && findBrute(makeArrayListStr(wordsFromLine[index]), (ArrayList<Character>) K) != -1) { //same thing but arrayList
@@ -97,7 +106,17 @@ public class countStringInText {
         return count;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+        Scanner scanText = new Scanner(System.out);
+        System.out.println("Please enther the location of the text file (path): ");
+        String filename = scanText.nextLine();
+        System.out.println("What is the pattern you want checked?");
+        String pattern = scanText.nextLine();
+
+        LinkedList<> patternForLinkedList = makeLinkedListStr(pattern);
+        ArrayList<> patternForArrayList = makeArrayListStr(pattern);
+
+        int originalTime = 
 
     }
 }
