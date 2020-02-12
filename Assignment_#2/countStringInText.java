@@ -74,16 +74,27 @@ public class countStringInText {
         BufferedReader read = new BufferedReader(new FileReader(filename));
 
         try {
-            String line = read.readLine();
-
-            while (line != null) {
-                //TODO: Create the methods for creating a linkedlist and an Array list BEFORE proceeding.
-                
-            }
+            String lineBeingRead = read.readLine();
             
-        } catch (Exception e) {
-            //TODO: handle exception
+
+            while (lineBeingRead != null) {
+                //TODO: Create the methods for creating a linkedlist and an Array list BEFORE proceeding.
+                wordsFromLine = lineBeingRead.split(""); //The string split() method breaks a given string around matches of the given regular expression.
+                // This essentially stores words between spaces
+                for (int index = 0; index < wordsFromLine.length; index++) { //iterates through array of all the words in the line
+                    if (K instanceof LinkedList && findBrute(makeLinkedListStr(wordsFromLine[index]), (LinkedList<Character>) K) != -1) {
+                        count = count + 1;
+                    } else if(K instanceof ArrayList && findBrute(makeArrayListStr(wordsFromLine[index]), (ArrayList<Character>) K) != -1) { //same thing but arrayList
+                        count = count + 1;
+                    }
+                    
+                }
+                lineBeingRead = read.readLine(); //do the same thing for the next line.
+            }
+        }finally{
+            read.close(); //had no idea that in java IO needs to be closed. Kinda annoying...
         }
+        return count;
     }
 
     public static void main(String[] args) {
