@@ -125,9 +125,9 @@ public class countStringInText {
         int countArrayList = searchListSpecificWord(filename, patternForArrayList);
         long elapsedTimeArrayList = System.currentTimeMillis() - originalTime;
 
-        System.out.println("Using the LinkedList approach: " + countLinkedList + "matches, done in " + elapsedTimeLinkedList + " milliseconds");
+        System.out.println("Using the LinkedList approach: " + countLinkedList + " matches, done in " + elapsedTimeLinkedList + " milliseconds");
         
-        System.out.println("Using the ArrayList approach: " + countArrayList + "matches, done in " + elapsedTimeArrayList + " milliseconds");
+        System.out.println("Using the ArrayList approach: " + countArrayList + " matches, done in " + elapsedTimeArrayList + " milliseconds");
         
         scanText.close(); // close scanner
     }
