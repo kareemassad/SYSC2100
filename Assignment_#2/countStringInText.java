@@ -107,7 +107,7 @@ public class countStringInText {
     }
 
     public static void main(String[] args)  {
-        Scanner scanText = new Scanner(System.out);
+        Scanner scanText = new Scanner(System.in);
         System.out.println("Please enther the location of the text file (path): ");
         String filename = scanText.nextLine();
         System.out.println("What is the pattern you want checked?");
@@ -124,5 +124,8 @@ public class countStringInText {
         int countArrayList = searchListSpecificWord(filename, patternForArrayList);
         long elapsedTimeArrayList = System.currentTimeMillis() - originalTime;
 
+        System.out.println("Using the LinkedList approach: " + countLinkedList + "matches, done in " + elapsedTimeLinkedList + " milliseconds");
+        
+        System.out.println("Using the ArrayList approach: " + countArrayList + "matches, done in " + elapsedTimeArrayList + " milliseconds");
     }
 }
