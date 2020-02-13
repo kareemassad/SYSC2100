@@ -35,19 +35,19 @@ public class countStringInText {
         return -1; // search failed
     }
     /* 
-        TODO:A method that makes a LinkedList
+        DONE:A method that makes a LinkedList
         1) The linked list can be as big as any given string (so it must itterate)
         2) It must return the string as chars in the exact given order
         space becomes s -> p -> a -> c -> e  with e being tail.
     */
     public static LinkedList<Character> makeLinkedListStr(String word){
         LinkedList<Character> inOrderedList = new LinkedList<Character>(); //This creates a new LinkedList that java infers type of
-        //TODO: Iterate through given word and add one by one (seems like an inefficient solution but only one can think of)
+        //DONE: Iterate through given word and add one by one (seems like an inefficient solution but only one can think of)
         for (int index = 0; index < word.length();index++) {
             inOrderedList.add(word.charAt(index)); //simply adds whatever the char is at the given iterant value to the list
         }
         return inOrderedList; //should return correct list
-        //TODO: check this thing for christs sake lol
+        //DONE: check this thing for christs sake lol
 
     }
 
@@ -56,7 +56,7 @@ public class countStringInText {
         Literally the same thing as the linked list
     */
     public static ArrayList<Character> makeArrayListStr(String word){
-        ArrayList<Character> inOrderedArray = new ArrayList<Character>(); //Again, java infers the type of the created ArrayList
+        ArrayList<Character> inOrderedArray = new ArrayList<Character>(); 
         for (int index = 0; index < word.length(); index++) {
             inOrderedArray.add(word.charAt(index)); //same concept,adds whatever the char is at the given iterant value to the list
         }
@@ -86,9 +86,10 @@ public class countStringInText {
             
 
             while (lineBeingRead != null) {
-                //TODO: Create the methods for creating a linkedlist and an Array list BEFORE proceeding.
+                //DONE: Create the methods for creating a linkedlist and an Array list BEFORE proceeding.
                 wordsFromLine = lineBeingRead.split(""); //The string split() method breaks a given string around matches of the given regular expression.
                 // This essentially stores words between spaces
+                // given "my name is blah" we now have [my, name, is, blah]
                 for (int index = 0; index < wordsFromLine.length; index++) { //iterates through array of all the words in the line
                     //same implentation but LinkedList vs ArrayList
                     if (K instanceof LinkedList && findBrute(makeLinkedListStr(wordsFromLine[index]), (LinkedList<Character>) K) != -1) {
@@ -107,11 +108,13 @@ public class countStringInText {
     }
 
     public static void main(String[] args) throws IOException{
-        Scanner scanText = new Scanner(System.in);
+        // Scanner scanText = new Scanner(System.in);
         System.out.println("Please enther the location of the text file (path): ");
-        String filename = scanText.nextLine();
+        // String filename = scanText.nextLine();
+        String filename = "LesMis.txt"; 
         System.out.println("What is the pattern you want checked?");
-        String pattern = scanText.nextLine();
+        // String pattern = scanText.nextLine();
+        String pattern = "e";
         
         //you must mention that it is type character. I thought java would infer type.
         LinkedList<Character> patternForLinkedList = makeLinkedListStr(pattern);
@@ -129,6 +132,6 @@ public class countStringInText {
         
         System.out.println("Using the ArrayList approach: " + countArrayList + " matches, done in " + elapsedTimeArrayList + " milliseconds");
         
-        scanText.close(); // close scanner
+        // scanText.close(); // close scanner
     }
 }
