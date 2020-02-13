@@ -3,14 +3,13 @@
     @Author: Kareem El Assad
     @Date: 2/11/2020
 */
-
+ 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.*;
-import java.util.Scanner;
 
 
 public class countStringInText {
@@ -114,7 +113,7 @@ public class countStringInText {
         String filename = "LesMis.txt"; 
         System.out.println("What is the pattern you want checked?");
         // String pattern = scanText.nextLine();
-        String pattern = "e";
+        String pattern = "Javert";
         
         //you must mention that it is type character. I thought java would infer type.
         LinkedList<Character> patternForLinkedList = makeLinkedListStr(pattern);

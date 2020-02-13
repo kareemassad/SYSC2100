@@ -9,6 +9,9 @@ import java.util.*;
 
 public class countStringPatterns {
 
+    int countArray = 0;
+    int countList = 0;
+
     long startTimeArray = 0;
     long startTimeList = 0;
     long endTimeArray = 0;
@@ -17,8 +20,8 @@ public class countStringPatterns {
 
     ArrayList<Character> ArrayList = new ArrayList<Character>();
     LinkedList<Character> LinkedList = new LinkedList<Character>();
-    ArrayList<Character> countArrayList;
-    LinkedList<Character> countLinkedList;
+    ArrayList<Character> blueArrayList;
+    LinkedList<Character> blueLinkedList;
 
     public countStringPatterns() {
         // blank
@@ -40,26 +43,6 @@ public class countStringPatterns {
 
             blue.compare(word, filename);
 
-            if (findBrute(countArrayList, ArrayList) != -1) {
-                countArrayList++;
-            }
-            if(findBrute(countLinkedList,LinkedList)!=-1){
-                countLinkedList++;
-            }
-
-            long originalTime = System.currentTimeMillis(); //current time, thanks for the hint prof haha
-        
-            int countLinkedList = searchListSpecificWord(filename, patternForLinkedList);
-            long elapsedTimeLinkedList = System.currentTimeMillis() - originalTime; //elapsed time for linked list
-    
-            int countArrayList = searchListSpecificWord(filename, patternForArrayList);
-            long elapsedTimeArrayList = System.currentTimeMillis() - originalTime;
-    
-            System.out.println("Using the LinkedList approach: " + countLinkedList + " matches, done in " + elapsedTimeLinkedList + " milliseconds");
-            
-            System.out.println("Using the ArrayList approach: " + countArrayList + " matches, done in " + elapsedTimeArrayList + " milliseconds");
-
-
 
         } catch (IOException e) {
             System.out.println("file could not be found");
@@ -76,10 +59,10 @@ public class countStringPatterns {
 
             for (int index = 0; index < word.length(); index++) {
                 ArrayList.add(word.charAt(index));
-
                 LinkedList.add(word.charAt(index));
+
             }
-            while(reading != null) {
+            while(reader != null) {
                 StringTokenizer object = new StringTokenizer(read);
 
                 while (object.hasMoreTokens()) {
@@ -91,30 +74,41 @@ public class countStringPatterns {
             System.out.println("Using ArrayList, found " + startTimeArray + "matches, delivered in " + endTimeArray + " milliseconds.");
 			System.out.println("Using LinkedList, found " + startTimeList + "matches, delivered in " + endTimeList + " milliseconds.");
             
-        } catch (Exception e) {
-            //TODO: handle exception
+            // reader.close();
+        } catch (IOException e) {
+            //DONE: handle exception
             System.out.println("Error! File not found or invalid String");
 			System.exit(1);
         }
     }
     private void time(StringTokenizer object) {
-        countArrayList = new ArrayList<Character>();
-        countLinkedList = new LinkedList<Character>();
+        blueArrayList = new ArrayList<Character>();
+        blueLinkedList = new LinkedList<Character>();
 
         String token = object.nextToken();
 
         for (int index = 0; index < token.length(); index++) {
-            countArrayList.add(token.charAt(index));
-            countLinkedList.add(token.charAt(index));
+            blueArrayList.add(token.charAt(index));
+            blueLinkedList.add(token.charAt(index));
         }
 
-        // //count time array
-        // long originalTimeArray = System.currentTimeMillis();
-        // if(findBrute(countArrayList, ArrayList) != -1){
-        //     count++;
-        // }
-        // long endTimeArray = System.currentTimeMillis();
-        // startTimeArray = startTimeArray + (endTimeArray - startTimeArray)
+        //count time for ArrayList
+		long startTimeArray = System.currentTimeMillis();
+		if(findBrute(blueArrayList,ArrayList)!=-1){
+			countArray++;
+		}
+		long endTimeArray = System.currentTimeMillis();
+		startTimeArray = startTimeArray + (endTimeArray-startTimeArray);
+		//end of timing block
+
+		//count time for LinkedList
+		long startTimeList = System.currentTimeMillis();
+		if(findBrute( blueLinkedList,LinkedList)!=-1){
+			countList++;
+		}
+		long endTimeList = System.currentTimeMillis();
+		startTimeList = startTimeList + (endTimeList - startTimeList);
+		//end of timing block
 
     }
     private static int findBrute(List<Character> text, List<Character> pattern) {
