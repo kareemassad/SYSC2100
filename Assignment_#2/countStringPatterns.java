@@ -7,15 +7,16 @@ import java.io.*;
 import java.util.*;
 
 
-public class countStringPatterns {
+public class CountStringPatterns {
+    long startOfArray = 0;
+    long startOfLinkdList = 0;
+    long endtimeOfArray = 0;
+    long endtimeOfList = 0;
 
     int countArray = 0;
-    int countList = 0;
-
-    long startTimeArray = 0;
-    long startTimeList = 0;
-    long endTimeArray = 0;
-    long endTimeList = 0;
+	int countList = 0;
+	float timeOfArray = 0;
+	float timeOfList = 0;
 
 
     ArrayList<Character> ArrayList = new ArrayList<Character>();
@@ -23,13 +24,13 @@ public class countStringPatterns {
     ArrayList<Character> blueArrayList;
     LinkedList<Character> blueLinkedList;
 
-    public countStringPatterns() {
+    public CountStringPatterns() {
         // blank
     }
 
     public static void main(String[] args) throws IOException {
         try {
-            countStringPatterns blue = new countStringPatterns();
+            CountStringPatterns blue = new CountStringPatterns();
 
             Scanner input = new Scanner(System.in);
 
@@ -62,7 +63,7 @@ public class countStringPatterns {
                 LinkedList.add(word.charAt(index));
 
             }
-            while(reader != null) {
+            while(read != null) {
                 StringTokenizer object = new StringTokenizer(read);
 
                 while (object.hasMoreTokens()) {
@@ -71,8 +72,8 @@ public class countStringPatterns {
                 }
                 read = reader.readLine();
             }
-            System.out.println("Using ArrayList, found " + startTimeArray + "matches, delivered in " + endTimeArray + " milliseconds.");
-			System.out.println("Using LinkedList, found " + startTimeList + "matches, delivered in " + endTimeList + " milliseconds.");
+            System.out.println("Using ArrayList, found " + countArray + "matches, delivered in " + timeOfArray + " milliseconds.");
+			System.out.println("Using LinkedList, found " + countList + "matches, delivered in "  + timeOfList + " milliseconds.");
             
             // reader.close();
         } catch (IOException e) {
@@ -93,21 +94,21 @@ public class countStringPatterns {
         }
 
         //count time for ArrayList
-		long startTimeArray = System.currentTimeMillis();
+		long startArray = System.currentTimeMillis();
 		if(findBrute(blueArrayList,ArrayList)!=-1){
 			countArray++;
 		}
-		long endTimeArray = System.currentTimeMillis();
-		startTimeArray = startTimeArray + (endTimeArray-startTimeArray);
+		long endArray = System.currentTimeMillis();
+		timeOfArray = timeOfArray + (endArray-startArray);
 		//end of timing block
 
 		//count time for LinkedList
-		long startTimeList = System.currentTimeMillis();
+		long timeStartList = System.currentTimeMillis();
 		if(findBrute( blueLinkedList,LinkedList)!=-1){
 			countList++;
 		}
-		long endTimeList = System.currentTimeMillis();
-		startTimeList = startTimeList + (endTimeList - startTimeList);
+		long timeEndList = System.currentTimeMillis();
+		timeOfList = timeOfList + (timeEndList-timeStartList);
 		//end of timing block
 
     }
