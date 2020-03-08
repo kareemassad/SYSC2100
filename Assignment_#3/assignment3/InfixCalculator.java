@@ -1,5 +1,6 @@
 package assignment3;
 
+
 import java.util.Stack;
 
 public class InfixCalculator {
@@ -9,87 +10,131 @@ public class InfixCalculator {
         expression = input;
     }
 
-    private int opPrecedence(String given) {
-        if(given.equals("+") | given.equals("-")){
+    private int operatorPrecedence(String c) {
+        if (c.equals("+") | c.equals("-")) {
             return 0;
         }
-        if (given.equals("*") | given.equals("/")) {
+        if (c.equals("*") | c.equals("/")) {
             return 1;
         }
-        if (given.equals("(") | given.equals(")")) {
+        if (c.equals("(") | c.equals(")")) {
             return 2;
-        }
-        else{
+        } else {
             return -1;
         }
     }
-    private boolean checkNumber(String given) { 
-        if(given.equals("0") | given.equals("1") | given.equals("2") | given.equals("3") | given.equals("4") | given.equals("5") | given.equals("6") | given.equals("7") | given.equals("8") | given.equals("9")){
+
+    private boolean isANumber(String c) {
+        if (c.equals("0") | c.equals("1") | c.equals("2") | c.equals("3") | c.equals("4") | c.equals("5") | c.equals("6") | c.equals("7") | c.equals("8") | c.equals("9")) { //if c is a number,
             return true;
         }
         return false;
     }
-    private boolean checkOperator(String given) {
-        if (given.equals("+") | given.equals("-") | given.equals("*") | given.equals("/")) {
-            return true;            
+
+    private boolean isAnOperator(String c) {
+        if (c.equals("+") | c.equals("-") | c.equals("*") | c.equals("/")) {
+            return true;
         }
         return false;
     }
 
-    private StackListBased convertPostFix() { 
-        //stack to temp hold operators
-        StackListBased temporaryStack = new StackListBased();
-        //hold finished post fix stack
-        StackListBased postFixStack = new StackListBased();
-        String[] expressionArray = new String [expression.length()];
-        int index = 0;
-        for (Character given : expression.toCharArray()) {
-            expressionArray[index] = given.toString();
-            index++;
+    private StackListBased convertPostfix() {
+        StackListBased tempStack = new StackListBased(); //stack to hold operators temporarily
+        StackListBased postfixStack = new StackListBased(); //stack to hold finished post fix expression
+        String[] expressionArray = new String[expression.length()];
+        int a = 0;
+        for (Character c : expression.toCharArray()) {
+            expressionArray[a] = c.toString();
+            a++;
         }
         for (int i = 0; i < expressionArray.length; i++) {
-            String given = expressionArray[i];
-            //ignore white space
-            if (given.equals(" ")) {
+            String c = expressionArray[i];
+            if (c.equals(" ")) {
                 continue;
-            }
-            if(checkNumber(given)) {
+            } //discard whitespace
+            if (isANumber(c)) { //if c is a number,
                 int k = 1;
-                String number = "" + given;
-                while (i + k < expressionArray.length && checkNumber(expressionArray[i + k])) {
+                String number = "" + c;
+                while (i + k < expressionArray.length && isANumber(expressionArray[i + k])) {
                     number = number + expressionArray[i + k];
                     k++;
                 }
                 if (k > 1) {
-                    postFixStack.push(number);
+                    postfixStack.push(number);
                     i = i + k - 1;
-                }else{
-                    postFixStack.push(given);
+                } else {
+                    postfixStack.push(c);
                     continue;
                 }
             }
-            if (given.equals("(")) {
-                temporaryStack.push(given);
+            if (c.equals("(")) {
+                tempStack.push(c);
             }
-            if (given.equals(")")) {
-                while (!((String) postFixStack.peek()).equals("(")) {
-                    postFixStack.push(temporaryStack.pop());
+            if (c.equals(")")) {
+                while (!((String) postfixStack.peek()).equals("(")) {
+                    postfixStack.push(tempStack.pop());
                 }
-                Object removeParanthasis = temporaryStack.pop();        
+                // Object garbageParenthesis = tempStack.pop();
             }
-            if(checkOperator(given)){
-                while (!temporaryStack.isEmpty() && !((String) temporaryStack.peek()).equals("(") && opPrecedence(given) <= opPrecedence((String) temporaryStack.peek())) {
-                    postFixStack.push(temporaryStack.pop());
+            if (isAnOperator(c)) {
+                while (!tempStack.isEmpty() && !((String) tempStack.peek()).equals("(") && operatorPrecedence(c) <= operatorPrecedence((String) tempStack.peek())) {
+                    postfixStack.push(tempStack.pop());
                 }
-                temporaryStack.push(given);
+                tempStack.push(c);
             }
         }
-        while (!temporaryStack.isEmpty()) {
-            postFixStack.push(temporaryStack.pop());            
+        while (!tempStack.isEmpty()) {
+            postfixStack.push(tempStack.pop());
         }
-        return postFixStack;
+        return postfixStack;
     }
-    private String postFixString(StackListBased postFixStack) {
+
+    private String postfixString(StackListBased postfixStack) {
         String s = "";
+        StackListBased reverseStack = new StackListBased();
+        while (!postfixStack.isEmpty()) {
+            reverseStack.push(postfixStack.pop());
+        }
+        while (!reverseStack.isEmpty()) {
+            s = s + reverseStack.pop().toString();
+        }
+        return s;
+    }
+
+    private int getPostfix(StackListBased postfixStack) {
+        StackListBased NumberStack = new StackListBased();
+        int result;
+        for (int i = 0; i < postfixStack.getSize(); i++) {
+            String c = (String) postfixStack.pop();
+            if (isANumber(c)) {
+                NumberStack.push(c);
+            }
+            else {
+                int a = Integer.parseInt((String) postfixStack.pop());
+                int b = Integer.parseInt((String) postfixStack.pop());
+                if (c.equals("+")) {
+                    NumberStack.push(a + b);
+                }
+                if (c.equals("-")) {
+                    NumberStack.push(a - b);
+                }
+                if (c.equals("*")) {
+                    NumberStack.push(a * b);
+                }
+                if (c.equals("/")) {
+                    NumberStack.push(a / b);
+                }
+            }
+        }
+        return (int) NumberStack.pop();
+    }
+
+    public void evaluateInfix() {
+        System.out.print("infix: " + this.expression + "\n");
+        StackListBased convertedStack = convertPostfix();
+        StackListBased convertedStack2 = convertPostfix();
+        System.out.print("postfix: " + postfixString(convertedStack) + "\n");
+        int result = getPostfix(convertedStack2);
+        System.out.print("result: " + result + "\n");
     }
 }
