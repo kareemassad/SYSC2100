@@ -1,9 +1,6 @@
 package assignment3;
 
-// import java.awt.*;
-// import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 public class LanguageRecognizerG {
     
