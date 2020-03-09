@@ -11,16 +11,14 @@ class StackListBased<Object> {
         items = new LinkedList<>();
     }
     /**
-     * Creates a new Stack
+     * Creat new Stack
      * createStack() ADT
      */
     void createStack() {
         items = new LinkedList<>();
     }
     /**
-     * Removes all items in Stacks
-     * popAll() ADT
-     * @return all values removed
+     * Removes all in stack
      */
     void popAll() {
         items.clear();

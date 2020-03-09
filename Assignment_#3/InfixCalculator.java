@@ -1,8 +1,6 @@
 import java.util.Map;
-import java.awt.*;
-import java.util.*;
 
-class InfixCalculator {
+class InfixCalculator { 
     private String input;
     private StackListBased<Integer> stack;
 
@@ -10,13 +8,21 @@ class InfixCalculator {
      *Construct InfixCalculator and instance input
      * @param input The postFix convert to infix and solve
      */
-    InfixCalculator(final String input) {
+    InfixCalculator(String input) {
         this.input = input;
         stack = new StackListBased<>();
     }
 
-    private static int runOperator(final String operator, final int num2, final int num1) {
-        // if operator is a provided operator (-+*/) then run it as a math operator on num1 and num2
+    /**
+     * This takes a certain operation such as 2+3 in String format and returns 5
+     * 
+     * @param operator of the operation
+     * @param num2  second number in operation
+     * @param num1  first number in operation
+     * @return  result of the certain operation, case specific
+     */
+    private static int selectUseOperator(String operator, int num2, int num1) {
+        // if operator given then use it and return result
         switch (operator) {
             case "+":
                 return num1 + num2;
@@ -30,62 +36,70 @@ class InfixCalculator {
                 return 0;
         }
     }
-
-    private String infixToPostfix(final String infix) {
-        // Map to convert Operation to precedence number
-        final Map<String, Integer> precedence = Map.of("+", 1, "-", 1, "*", 2, "/", 2);
-        final StringBuilder postFix = new StringBuilder();
-        StackListBased<String> operatorStack = new StackListBased<>();
-        //Remove white space and parse String to list strings (tokenize)
-        final String[] tokenize = infix.replaceAll("\\s+", "").split("(?=[-+*/()])|(?<=[-+*/()])");
-        for (final String token : tokenize) {
-            //If token is a number append it to prefix along with a space for parsing
+    /**
+     * 
+     * @param infix
+     * @return
+     */
+    private String infixToPostfix(String infix) {
+        //Map for precedence of operation
+        Map<String, Integer> precedence = Map.of("+", 1, "-", 1, "*", 2, "/", 2);
+        StringBuilder postFix = new StringBuilder();
+        StackListBased<String> stackOfOperators = new StackListBased<>();
+        //Remove white spaces and unwanted chars then reorganize
+        String[] tokenize = infix.replaceAll("\\s+", "").split("(?=[-+*/()])|(?<=[-+*/()])");
+        for (String token : tokenize) {
+            //take token that is a number then append it to prefix for parsing
             if (token.matches("\\d+")) {
                 postFix.append(token);
                 postFix.append(" ");
-                //If the token is an opening bracket push to the stack.
+                //exclude open brakcets > push to top stack
             } else if (token.equals("(")) {
-                operatorStack.push(token);
-                //If the token is a closing bracket pop from the stack in a append to the prefix along with a space for parsing in till Opening bracket is found
+                stackOfOperators.push(token);
+                //exclude close and make sure to find next opening brace 
             } else if (token.equals(")")) {
-                while (!operatorStack.peek().equals("(")) {
-                    postFix.append(operatorStack.pop());
+                while (!stackOfOperators.peek().equals("(")) {
+                    postFix.append(stackOfOperators.pop());
                     postFix.append(" ");
                 }
-                operatorStack.pop();
-                //If token is operator Sort by precedence and append appropriate operators to postFix according to lecture 10 slides
+                stackOfOperators.pop();
+                //if token is an operator, sort by precedence
             } else if (token.matches("[-+*/]")) {
-                while (!operatorStack.isEmpty() && !operatorStack.peek().equals("(") && (precedence.get(token) <= precedence.get(operatorStack.peek()))) {
-                    postFix.append(operatorStack.pop());
+                while (!stackOfOperators.isEmpty() && !stackOfOperators.peek().equals("(") && (precedence.get(token) <= precedence.get(stackOfOperators.peek()))) {
+                    postFix.append(stackOfOperators.pop());
                     postFix.append(" ");
                 }
-                operatorStack.push(token);
+                stackOfOperators.push(token);
             }
         }
         //Clear operator stack into postfix
-        while (!operatorStack.isEmpty()) {
-            postFix.append(operatorStack.pop());
+        while (!stackOfOperators.isEmpty()) {
+            postFix.append(stackOfOperators.pop());
             postFix.append(" ");
         }
         postFix.deleteCharAt(postFix.lastIndexOf(" "));
         return postFix.toString();
     }
 
-    private int getPostfix(final String postFix) {
-        //Purse postFix expression by Preplaced spaces
-        for (final String token : postFix.split(" ")) {
-            //If token is a number push to the stack else run the token on the first two number from the stack
+    /**
+     * 
+     * @param postFix
+     * @return if token is a number put it to the stack otherwise pop it
+     */
+    private int getPostfix(String postFix) {
+        for (String token : postFix.split(" ")) {
             if (token.matches("\\d+")) {
                 stack.push(Integer.parseInt(token));
-            } else {
-                stack.push(runOperator(token, stack.pop(), stack.pop()));
+            } else {    
+                //NOTE: recursive call
+                stack.push(selectUseOperator(token, stack.pop(), stack.pop()));
             }
         }
         return stack.pop();
     }
 
     /**
-     *Run and print the results of infixToPostfix and getPostfix.
+     * Print and run the results of infixToPostfix and getPostfix.
      */
     void evaluateInfix() {
         System.out.println("infix: " + input);
