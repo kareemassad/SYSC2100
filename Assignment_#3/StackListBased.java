@@ -1,37 +1,29 @@
-package assignment3;
-
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
-public class StackListBased {
+class StackListBased<Object> {
     //create object in linked list for stack
-    LinkedList<Object> items;
+    private LinkedList<Object> items;
 
+    /**
+     * Construct StackListBased and instantiate items to a new linkedList
+     */
     StackListBased(){
-        items = new LinkedList<Object>();
+        items = new LinkedList<>();
     }
     /**
      * Creates a new Stack
      * createStack() ADT
-     * @return a new Stack Based List
      */
-    public StackListBased createStack() {
-        return new StackListBased();
+    void createStack() {
+        items = new LinkedList<>();
     }
     /**
      * Removes all items in Stacks
      * popAll() ADT
      * @return all values removed
      */
-    public Object popAll() {
-        int i = 0;
-        int initialSize = items.size();
-        Object x = null;
-        while (i < initialSize) {
-            x = items.pop();
-            i++;
-        }
-        return x;
+    void popAll() {
+        items.clear();
     }
     /**
      * Gets size of stack
@@ -46,7 +38,7 @@ public class StackListBased {
      * isEmpty() ADT
      * @return true if it is empty
      */
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return items.isEmpty();
     }
     /**
@@ -54,7 +46,7 @@ public class StackListBased {
      * push() ADT
      * @param e
      */
-    public void push(Object e){
+    void push(Object e){
         items.push(e);
     }
     /**
@@ -62,10 +54,7 @@ public class StackListBased {
      * pop() ADT
      * @return object that was removed from the otp
      */
-    public Object pop() {
-        if (items.peek() == null) {
-            throw new NoSuchElementException();
-        }
+    Object pop() {
         return items.pop();
     }
     /**
@@ -73,7 +62,7 @@ public class StackListBased {
      * peek() ADT
      * @return the object at the top of the stack
      */
-    public Object peek() {
+    Object peek() {
         return items.peek();
     }
 }

@@ -1,4 +1,3 @@
-package assignment3;
 import java.io.*;
 
 public class Assignment3 {
