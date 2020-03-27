@@ -1,14 +1,17 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * This class is made for the sysc2100 Assignment number 4
+ * 
  * @author Kareem El Assad
  * @version 3/26/2020
  * 
  */
 class Assignment4 {
     /**
-     * 
+     * A recursive implementation of the selection sort.
      * @param <T>   Array type
      * @param theArray  The array being sorted  
      * @param n the size of the array
@@ -32,7 +35,7 @@ class Assignment4 {
         }
     }
     /**
-     * 
+     * A recursive implementation of the bubble sort.
      * @param <T>   Array type
      * @param theArray  The array being sorted
      * @param n size of the array
@@ -62,10 +65,11 @@ class Assignment4 {
     }
     //wasnt this on the midterm?
     /**
-     * This program stores the part of the word before the $ in a queue and the part after the
-     * $ in the stack. It will then check if the queue and stack have the same size. If they do,
-     * it will then remove a letter from the queue and the stack. If they are the same all the way
-     * then the string is in the language otherwise it is not.
+     * This program takes a string and check if it is in the L language. Words in the L language
+     * follow this format: "pens$snep". The program stores the part of the word before the $ in 
+     * a queue and the part after the $ in the stack. It will then check if the queue and stack 
+     * have the same size. If they do, it will then remove a letter from the queue and the stack. 
+     * If they are the same all the way then the string is in the language otherwise it is not.
      * 
      * @param str string given
      * @return true if the string is in the language
@@ -75,8 +79,6 @@ class Assignment4 {
         //dont need to put second types are java (should) infer type
         Queue<Character> QQ = new LinkedList<>();
         Stack<Character> SS = new Stack<>();
-
-        int lengthString = str.length();
         int i = 0;
 
         //Base case. All chars will be in order until $. They will only need to be reversed after the $.
@@ -88,7 +90,7 @@ class Assignment4 {
         // This is very important as to get past the $ condition when the loop above stops
         i++;
         //fill the stack with the rest
-        while (i < lengthString) {
+        while (i < str.length()) {
             SS.add(str.charAt(i));
             i++;
         }
@@ -107,13 +109,36 @@ class Assignment4 {
         return true;
     }
 
+    /**
+     * This method takes a string of spaces and numbers then it to a number
+     * @param str String to convert to a number
+     * @return  returns a number representing
+     */
     public static int convertToNumber (String str) {
         int n = 0;
-        for (int index = 0; index < str.length(); index++) {
-            if (str.charAt(index) != ' ') {
-                n = (n*10) + Character.getNumericValue(str.charAt(index));
+        try {
+            // Added this section as to increase the efficiency in best case
+            n = Integer.parseInt(str);  
+            return n;          
+        } catch (NumberFormatException e) {
+            //DONE: handle exception
+            //loop through string
+            for (int index = 0; index < str.length(); index++) {
+                //If it is not a space it is a valid number
+                if (str.charAt(index) != ' ') {
+                    /* Since every new number from the right is 10x smaller than the number 
+                    before it in terms of locations ie: ones, tens, hundreds, thousands...
+                    We can deduce that any number (2nd number+) parsed from the left will
+                    follow a similar pattern. 
+                    ie: 247
+                    > 2
+                    > (2*10) + 4 = 24
+                    > (24*10) + 7 = 247 DONE!
+                    */
+                    n = (n*10) + Character.getNumericValue(str.charAt(index));
+                }
             }
+            return n;
         }
-        return n;
     }
 }
