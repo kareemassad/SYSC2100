@@ -85,13 +85,13 @@ public class MarkingAssignment4 extends Assignment4 {
            }
            
            
-        //    System.out.println("After BUBBLE SORT: \n");
-        //    recursiveBubbleSort(anArray,anArray.length);
+            System.out.println("After BUBBLE SORT: \n");
+            recursiveBubbleSort(anArray,anArray.length);
            
-        //    for (i=0;i<anArray.length;i++)
-        //    {
-        //        System.out.println(anArray[i]);
-        //    }
+            for (i=0;i<anArray.length;i++)
+            {
+                System.out.println(anArray[i]);
+            }
                      
     }
 }

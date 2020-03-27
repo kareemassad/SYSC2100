@@ -49,7 +49,7 @@ class Assignment4 {
             if(theArray[i].compareTo(theArray[i-1]) < 0){
                 //simple switcheroo
                 T temp = theArray[i];
-                theArray[i] = theArray[i-1]
+                theArray[i] = theArray[i-1];
                 theArray[i-1] = temp;
                 //not sorted identifier
                 checker = false;
