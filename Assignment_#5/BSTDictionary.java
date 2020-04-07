@@ -109,7 +109,8 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
                 if (this.currentNode.getLeft() == null) {
                     this.currentNode.setLeft(temporary);
                     this.currentNode = head;
-                } else { //if the node was not empty the currentrent node is now the left node
+                //if the node was not empty the current node is now the left node
+                } else { 
                     this.currentNode = this.currentNode.getLeft();
                     insert(key, element);
                 }

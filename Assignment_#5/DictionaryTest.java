@@ -20,70 +20,87 @@ public class DictionaryTest {
 	} // fill method
 
 	public static void main(String[] args) {
-		BSTDictionary<String, SortableString> dict1 = new BSTDictionary<String, SortableString>();
+        BSTDictionary<String, SortableString> dict2 = new BSTDictionary<String, SortableString>();
+        dict2.insert(new SortableString("Jane"), "12");
+        dict2.insert(new SortableString("Bob"), "2");
+        dict2.insert(new SortableString("Alan"), "43");
+        dict2.insert(new SortableString("Ellen"), "5");
+        dict2.insert(new SortableString("Tom"), "2");
+        dict2.insert(new SortableString("Nancy"), "1");
+        dict2.insert(new SortableString("Wendy"), "0");
+        System.out.println(dict2.search(new SortableString("Nancy")));
+        System.out.println("Depth before deleting: " + dict2.depth());
+        dict2.delete(new SortableString("Alan"));
+        dict2.delete(new SortableString("Ellen"));
+        dict2.delete(new SortableString("Jane"));
+        System.out.println("Depth after deleting: " + dict2.depth());
+        dict2.printTree();
+    }
+	// public static void main(String[] args) {
+	// 	BSTDictionary<String, SortableString> dict1 = new BSTDictionary<String, SortableString>();
 
-		// Insert lots of entries
-		fill();
-		for (int i = 0; i < 26 * 26; i++) {
-			int e;
-			do {
-				e = (int) (Math.random() * (26 * 26));
-			} while (entries[e] == null);
+	// 	// Insert lots of entries
+	// 	fill();
+	// 	for (int i = 0; i < 26 * 26; i++) {
+	// 		int e;
+	// 		do {
+	// 			e = (int) (Math.random() * (26 * 26));
+	// 		} while (entries[e] == null);
 
-			dict1.insert(new SortableString(entries[e]), entries[e]);
-			entries[e] = null;
-		}
+	// 		dict1.insert(new SortableString(entries[e]), entries[e]);
+	// 		entries[e] = null;
+	// 	}
 
-		// print the two dictionaries
-		dict1.printTree();
-		// print the depth
-		System.out.println("The initial BST tree has a maximum depth of "
-				+ dict1.depth());
+	// 	// print the two dictionaries
+	// 	dict1.printTree();
+	// 	// print the depth
+	// 	System.out.println("The initial BST tree has a maximum depth of "
+	// 			+ dict1.depth());
 
-		// Delete half the entries
-		fill();
-		for (int i = 0; i < 13 * 26; i++) {
-			int e;
-			do {
-				e = (int) (Math.random() * (26 * 26));
-			} while (entries[e] == null);
+	// 	// Delete half the entries
+	// 	fill();
+	// 	for (int i = 0; i < 13 * 26; i++) {
+	// 		int e;
+	// 		do {
+	// 			e = (int) (Math.random() * (26 * 26));
+	// 		} while (entries[e] == null);
 
-			dict1.delete(new SortableString(entries[e]));
-		}
+	// 		dict1.delete(new SortableString(entries[e]));
+	// 	}
 
-		System.out
-				.println("After deletes, the BST tree has a maximum depth of "
-						+ dict1.depth());
+	// 	System.out
+	// 			.println("After deletes, the BST tree has a maximum depth of "
+	// 					+ dict1.depth());
 
-		// Add a quarter the entries
-		fill();
-		for (int i = 0; i < 6 * 26; i++) {
-			int e;
-			do {
-				e = (int) (Math.random() * (26 * 26));
-			} while (entries[e] == null);
+	// 	// Add a quarter the entries
+	// 	fill();
+	// 	for (int i = 0; i < 6 * 26; i++) {
+	// 		int e;
+	// 		do {
+	// 			e = (int) (Math.random() * (26 * 26));
+	// 		} while (entries[e] == null);
 
-			dict1.insert(new SortableString(entries[e]), entries[e]);
-		}
+	// 		dict1.insert(new SortableString(entries[e]), entries[e]);
+	// 	}
 
-		System.out
-				.println("After insertions, the BST tree has a maximum depth of "
-						+ dict1.depth());
+	// 	System.out
+	// 			.println("After insertions, the BST tree has a maximum depth of "
+	// 					+ dict1.depth());
 
-		// Search for a few random entries
-		fill();
-		for (int i = 0; i < 6; i++) {
-			int e;
-			do {
-				e = (int) (Math.random() * (26 * 26));
-			} while (entries[e] == null);
+	// 	// Search for a few random entries
+	// 	fill();
+	// 	for (int i = 0; i < 6; i++) {
+	// 		int e;
+	// 		do {
+	// 			e = (int) (Math.random() * (26 * 26));
+	// 		} while (entries[e] == null);
 
-			System.out.print("Searching for " + entries[e] + ": ");
-			if (dict1.search(new SortableString(entries[e])) == null) {
-				System.out.print("Not found\n");
-			} else {
-				System.out.print("Found\n");
-			}
-		}
-	} // main method
+	// 		System.out.print("Searching for " + entries[e] + ": ");
+	// 		if (dict1.search(new SortableString(entries[e])) == null) {
+	// 			System.out.print("Not found\n");
+	// 		} else {
+	// 			System.out.print("Found\n");
+	// 		}
+	// 	}
+	// } // main method
 } /* DictionaryTest class */
